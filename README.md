@@ -26,15 +26,17 @@ import 'package:wallpaper_manager/wallpaper_manager.dart';
 Since this is not a Widget, you have to create WallpaperManager constructors from inside an async function, which is a Future that returns a String output specifying success/failure.
 ```dart
 String path = "/path/to/file/on/disk";
-final String result = await WallpaperManager.setWallpaperFromPath(path);
+int location = WallpaperManager.HOME_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
+final String result = await WallpaperManager.setWallpaperFromPath(path, location);
 ```
 
 You might want to wrap it in a try/catch since platform messages (plug-ins like these) may fail
 ```dart
 String path = "/path/to/file/on/disk";
+int location = WallpaperManager.HOME_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
 String result;
 try {
-  result = await WallpaperManager.setWallpaperFromPath(path);
+  result = await WallpaperManager.setWallpaperFromPath(path, location);
 } on PlatformException {
   result = 'Failed to get wallpaper.';
 }
@@ -50,9 +52,27 @@ dependencies:
 And in dart code
 ```dart
 String url = "";
+int location = WallpaperManager.HOME_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
 String result;
 var file = await DefaultCacheManager().getSingleFile(url);
-final String result = await WallpaperManager.setWallpaperFromPath(file.path);
+final String result = await WallpaperManager.setWallpaperFromPath(file.path, location);
+```
+
+If you're loading a Wallpaper from an asset, you need to make sure it is indexed in the pubspec.yaml file first
+```yaml
+dependencies:
+  ...
+  flutter:
+    ...
+    assets:
+    - assets/tmp1.jpeg
+```
+And in dart code
+```dart
+String assetPath = "assets/tmp1.jpg";
+int location = WallpaperManager.HOME_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
+String result;
+final String result = await WallpaperManager.setWallpaperFromAsset(assetPath, location);
 ```
 
 ## Getting started
