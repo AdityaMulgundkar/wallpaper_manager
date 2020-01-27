@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Fixed version shown in documentation, added dartdoc comments.
+
 ## 1.0.2
 
 * Fixed README

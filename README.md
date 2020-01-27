@@ -13,7 +13,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  wallpaper_manager: "^1.0.0"
+  wallpaper_manager: "^1.0.3"
 ```
 
 In your library add the following import:

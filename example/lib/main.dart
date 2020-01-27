@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
     });
     String result;
     var file =
-    await DefaultCacheManager().getSingleFile('http://screensavers.riotgames.com/v2/latest/content/original/VideoStills/Warriors/war_2020_02.jpg');
+    await DefaultCacheManager().getSingleFile('https://images.unsplash.com/photo-1542435503-956c469947f6');
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await WallpaperManager.setWallpaperFromFile(file.path, WallpaperManager.HOME_SCREEN);
