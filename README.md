@@ -13,7 +13,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  wallpaper_manager: "^1.0.3"
+  wallpaper_manager: "^1.0.4"
 ```
 
 In your library add the following import:
@@ -45,7 +45,7 @@ try {
 }
 ```
 
-#### Loading from a URL and setting the wallpaper (with CacheManager, the image is saved to app files as well)
+#### Loading from a URL (with CacheManager, the image is saved to app files as well)
 If you're loading a Wallpaper from a URL, you should save it to the disk first, then use the path of the saved image file.
 Add flutter_cache_manager or any other dependency you'd like:
 ```yaml
@@ -91,6 +91,10 @@ For help getting started with Flutter, view the online [documentation](https://f
 ## Notes
  * iOS does not support changing Wallpapers from third-party apps [Source](https://stackoverflow.com/questions/56112014/can-i-change-ios-screen-wallpaper-programmatically-in-swift-5-and-ios-12)
  * Xiaomi/MIUI does not support changing Lock Screen Wallpapers directly from the Android API [Source](https://in.c.mi.com/thread-1252992-1-0.html). You might want to look at creating a Lock Screen Launcher app instead.
+
+## Todos
+   - [ ] Add variable for re-using Wallpaper from phone's settings
+   - [ ] Add rect values for optionally cropping the image
 
 ## Changelog
 
