@@ -13,7 +13,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  wallpaper_manager: "^1.0.4"
+  wallpaper_manager: "^1.0.5"
 ```
 
 In your library add the following import:
@@ -89,12 +89,14 @@ See the `example` directory for a complete sample app using Wallpaper Manager.
 For help getting started with Flutter, view the online [documentation](https://flutter.io/).
 
 ## Notes
- * iOS does not support changing Wallpapers from third-party apps [Source](https://stackoverflow.com/questions/56112014/can-i-change-ios-screen-wallpaper-programmatically-in-swift-5-and-ios-12)
- * Xiaomi/MIUI does not support changing Lock Screen Wallpapers directly from the Android API [Source](https://in.c.mi.com/thread-1252992-1-0.html). You might want to look at creating a Lock Screen Launcher app instead.
+ * iOS does not support changing Wallpapers from third-party apps [\(Source\)](https://stackoverflow.com/questions/56112014/can-i-change-ios-screen-wallpaper-programmatically-in-swift-5-and-ios-12)
+ * Xiaomi/MIUI does not support changing Lock Screen Wallpapers directly from the Android API [\(Source\)](https://in.c.mi.com/thread-1252992-1-0.html). You might want to look at creating a Lock Screen Launcher app instead.
 
 ## Todos
-   - [ ] Add variable for re-using Wallpaper from phone's settings
+   - [ ] Write tests
    - [ ] Add rect values for optionally cropping the image
+   - [ ] Add variable for re-using Wallpaper from phone's settings
+   - [ ] Write more tests
 
 ## Changelog
 

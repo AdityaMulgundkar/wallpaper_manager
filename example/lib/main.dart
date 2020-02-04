@@ -42,18 +42,18 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> setWallpaperFromFile() async {
     setState(() {
       _wallpaperFile = "Loading";
     });
     String result;
-    var file =
-    await DefaultCacheManager().getSingleFile('https://images.unsplash.com/photo-1542435503-956c469947f6');
+    var file = await DefaultCacheManager().getSingleFile(
+        'https://images.unsplash.com/photo-1542435503-956c469947f6');
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result = await WallpaperManager.setWallpaperFromFile(file.path, WallpaperManager.HOME_SCREEN);
+      result = await WallpaperManager.setWallpaperFromFile(
+          file.path, WallpaperManager.HOME_SCREEN);
     } on PlatformException {
       result = 'Failed to get wallpaper.';
     }
@@ -77,7 +77,8 @@ class _MyAppState extends State<MyApp> {
     String assetPath = "assets/tmp1.jpg";
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result = await WallpaperManager.setWallpaperFromAsset(assetPath, WallpaperManager.HOME_SCREEN);
+      result = await WallpaperManager.setWallpaperFromAsset(
+          assetPath, WallpaperManager.HOME_SCREEN);
     } on PlatformException {
       result = 'Failed to get wallpaper.';
     }
@@ -96,38 +97,34 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Column(
-          children: <Widget>[
-            RaisedButton(
-              child: Text("Platform Version"),
-              onPressed: initPlatformState,
-            ),
-            Center(
-              child: Text('Running on: $_platformVersion\n'),
-            ),
-
-            RaisedButton(
-              child: Text("Set wallpaper from file"),
-              onPressed: setWallpaperFromFile,
-            ),
-            Center(
-              child: Text('Wallpaper status: $_wallpaperFile\n'),
-            ),
-
-            RaisedButton(
-              child: Text("Set wallpaper from asset"),
-              onPressed: setWallpaperFromAsset,
-            ),
-            Center(
-              child: Text('Wallpaper status: $_wallpaperAsset\n'),
-            ),
-
-          ],
-        )
-      ),
+          appBar: AppBar(
+            title: const Text('Plugin example app'),
+          ),
+          body: Column(
+            children: <Widget>[
+              RaisedButton(
+                child: Text("Platform Version"),
+                onPressed: initPlatformState,
+              ),
+              Center(
+                child: Text('Running on: $_platformVersion\n'),
+              ),
+              RaisedButton(
+                child: Text("Set wallpaper from file"),
+                onPressed: setWallpaperFromFile,
+              ),
+              Center(
+                child: Text('Wallpaper status: $_wallpaperFile\n'),
+              ),
+              RaisedButton(
+                child: Text("Set wallpaper from asset"),
+                onPressed: setWallpaperFromAsset,
+              ),
+              Center(
+                child: Text('Wallpaper status: $_wallpaperAsset\n'),
+              ),
+            ],
+          )),
     );
   }
 }
