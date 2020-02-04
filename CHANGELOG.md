@@ -1,3 +1,7 @@
+## 1.0.5
+
+* More To-dos
+
 ## 1.0.4
 
 * Fixed README, added To-dos
