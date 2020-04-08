@@ -95,7 +95,7 @@ For help getting started with Flutter, view the online [documentation](https://f
  * Xiaomi/MIUI does not support changing Lock Screen Wallpapers directly from the Android API [\(Source\)](https://in.c.mi.com/thread-1252992-1-0.html). You might want to look at creating a Lock Screen Launcher app instead.
 
 ## Known Issues
- * Due to a change in [Flutter's Embedding Engine] (https://flutter.dev/docs/development/packages-and-plugins/plugin-api-migration), you might face an [issue](https://github.com/AdityaMulgundkar/wallpaper_manager/issues/2) while building your project. To work around this, you can upgrade to the latest version of the plugin (which directly handles both v1 & v2 Embedding from v.1.0.6) or change the [Flutter Embedding Engine version in your project](https://github.com/flutter/flutter/wiki/Upgrading-pre-1.12-Android-projects).
+ * Due to a change in [Flutter's Embedding Engine](https://flutter.dev/docs/development/packages-and-plugins/plugin-api-migration), you might face an [issue](https://github.com/AdityaMulgundkar/wallpaper_manager/issues/2) while building your project. To work around this, you can upgrade to the latest version of the plugin (which directly handles both v1 & v2 Embedding from v.1.0.6) or change the [Flutter Embedding Engine version in your project](https://github.com/flutter/flutter/wiki/Upgrading-pre-1.12-Android-projects).
 
 ## Todos
    - [ ] Write tests
