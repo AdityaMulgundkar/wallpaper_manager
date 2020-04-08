@@ -31,7 +31,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** WallpaperManagerPlugin */
 public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler {
-  private Context context;
+  private static Context context;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -40,9 +40,10 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
     channel.setMethodCallHandler(this);
   }
 
-  public void registerWith(Registrar registrar) {
+  public static void registerWith(Registrar registrar) {
+    context = registrar.context();
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "wallpaper_manager");
-    channel.setMethodCallHandler(this);
+    channel.setMethodCallHandler(new WallpaperManagerPlugin());
   }
 
   @Override
@@ -65,6 +66,7 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+    context = null;
   }
 
   @SuppressLint("MissingPermission")

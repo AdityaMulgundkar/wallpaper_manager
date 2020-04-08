@@ -1,3 +1,7 @@
+## 1.0.6
+
+* [Fixed issue #2](https://github.com/AdityaMulgundkar/wallpaper_manager/issues/2 "Problems due to change in Flutter's Embedding engine / GeneratedPluginRegistrant.java")
+
 ## 1.0.5
 
 * More To-dos
