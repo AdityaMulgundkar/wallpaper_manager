@@ -1,3 +1,7 @@
+## 1.0.7
+
+* [Fixed issue #7](https://github.com/AdityaMulgundkar/wallpaper_manager/issues/7 "Android resource linking failed")
+
 ## 1.0.6
 
 * [Fixed issue #2](https://github.com/AdityaMulgundkar/wallpaper_manager/issues/2 "Problems due to change in Flutter's Embedding engine / GeneratedPluginRegistrant.java")
