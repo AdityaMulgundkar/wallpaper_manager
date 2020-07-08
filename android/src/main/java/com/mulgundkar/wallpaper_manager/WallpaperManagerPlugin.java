@@ -9,6 +9,7 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Environment;
 
@@ -55,8 +56,14 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
       case "setWallpaperFromFile":
         result.success(setWallpaperFromFile((String) call.argument("filePath"), (int) call.argument("wallpaperLocation")));
         break;
+      case "setWallpaperFromFileWithCrop":
+        result.success(setWallpaperFromFileWithCrop((String)call.argument("filePath"), (int)call.argument("wallpaperLocation"), (int) call.argument("left"), (int) call.argument("top"), (int) call.argument("right"), (int) call.argument("bottom")));
+        break;
       case "setWallpaperFromAsset":
         result.success(setWallpaperFromAsset((String) call.argument("assetPath"), (int) call.argument("wallpaperLocation")));
+        break;
+      case "setWallpaperFromAssetWithCrop":
+        result.success(setWallpaperFromAssetWithCrop((String)call.argument("assetPath"), (int)call.argument("wallpaperLocation"), (int) call.argument("left"), (int) call.argument("top"), (int) call.argument("right"), (int) call.argument("bottom")));
         break;
       default:
         result.notImplemented();
@@ -88,6 +95,24 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
   }
 
   @SuppressLint("MissingPermission")
+  private int setWallpaperFromFileWithCrop(String filePath, int wallpaperLocation, int left, int top, int right, int bottom) {
+    int result = -1;
+    Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+    WallpaperManager wm = null;
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ECLAIR) {
+      wm = WallpaperManager.getInstance(context); 
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        try {
+          result = wm.setBitmap(bitmap, Rect(left, top, right, bottom), false, wallpaperLocation);
+        }catch (IOException e) {
+          e.printStackTrace(); 
+        }
+      }
+    }
+    return result;
+  }
+  
+  @SuppressLint("MissingPermission")
   private int setWallpaperFromAsset(String assetPath, int wallpaperLocation) {
     InputStream fd = null;
     int result = -1;
@@ -106,6 +131,30 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
         }
       }
     } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return result;
+  }
+  
+  @SuppressLint("MissingPermission")
+  private int setWallpaperFromAssetWithCrop(String assetPath, int wallpaperLocation, int left, int top, int right, int bottom) {
+    InputStream fd = null;
+    int result = -1;
+    try {
+      fd = context.getAssets().open("flutter_assets/" + assetPath);
+      Bitmap bitmap = BitmapFactory.decodeStream(fd);
+      WallpaperManager wm = null; 
+      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ECLAIR) {
+        wm = WallpaperManager.getInstance(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+          try {
+            result = wm.setBitmap(bitmap, Rect(left, top, right, bottom), false, wallpaperLocation);
+          }catch (IOException e) {
+            e.printStackTrace(); 
+          }
+        }
+      }
+    }catch (IOException e) {
       e.printStackTrace();
     }
     return result;
