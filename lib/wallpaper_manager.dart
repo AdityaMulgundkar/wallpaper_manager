@@ -12,6 +12,9 @@ class WallpaperManager {
 
   /// Static code for Lock Screen Wallpaper Choice
   static const int LOCK_SCREEN = 2;
+  
+  // Static code for both Home Screen and Lock Screen Wallpaper Choice
+  static const int BOTH_SCREENS = 3;
 
   static Future<String> get platformVersion async {
     /// String to store the version number before returning. This is just to test working/validity.
