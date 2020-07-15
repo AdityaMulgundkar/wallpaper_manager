@@ -15,7 +15,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   String _wallpaperFile = 'Unknown';
+  String _wallpaperFileWithCrop = 'Unknown';
   String _wallpaperAsset = 'Unknown';
+  String _wallpaperAssetWithCrop = 'Unknown';
 
   @override
   void initState() {
@@ -69,6 +71,32 @@ class _MyAppState extends State<MyApp> {
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> setWallpaperFromFileWithCrop() async {
+    setState(() {
+      _wallpaperFileWithCrop = "Loading";
+    });
+    String result;
+    var file = await DefaultCacheManager().getSingleFile(
+        'https://images.unsplash.com/photo-1542435503-956c469947f6');
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await WallpaperManager.setWallpaperFromFileWithCrop(
+          file.path, WallpaperManager.HOME_SCREEN, 0, 0, 800, 800);
+    } on PlatformException {
+      result = 'Failed to get wallpaper.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _wallpaperFileWithCrop = result;
+    });
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> setWallpaperFromAsset() async {
     setState(() {
       _wallpaperAsset = "Loading";
@@ -90,6 +118,31 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _wallpaperAsset = result;
+    });
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> setWallpaperFromAssetWithCrop() async {
+    setState(() {
+      _wallpaperAssetWithCrop = "Loading";
+    });
+    String result;
+    String assetPath = "assets/tmp1.jpg";
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await WallpaperManager.setWallpaperFromAssetWithCrop(
+          assetPath, WallpaperManager.HOME_SCREEN, 0, 0, 800, 800);
+    } on PlatformException {
+      result = 'Failed to get wallpaper.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _wallpaperAssetWithCrop = result;
     });
   }
 
@@ -117,11 +170,25 @@ class _MyAppState extends State<MyApp> {
                 child: Text('Wallpaper status: $_wallpaperFile\n'),
               ),
               RaisedButton(
+                child: Text("Set wallpaper from file with crop"),
+                onPressed: setWallpaperFromFileWithCrop,
+              ),
+              Center(
+                child: Text('Wallpaper status: $_wallpaperFileWithCrop\n'),
+              ),
+              RaisedButton(
                 child: Text("Set wallpaper from asset"),
                 onPressed: setWallpaperFromAsset,
               ),
               Center(
                 child: Text('Wallpaper status: $_wallpaperAsset\n'),
+              ),
+              RaisedButton(
+                child: Text("Set wallpaper from asset with crop"),
+                onPressed: setWallpaperFromAssetWithCrop,
+              ),
+              Center(
+                child: Text('Wallpaper status: $_wallpaperAssetWithCrop\n'),
               ),
             ],
           )),

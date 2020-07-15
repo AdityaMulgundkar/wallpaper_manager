@@ -1,6 +1,6 @@
 name: wallpaper_manager
 description: A Flutter plugin for changing the Home Screen, Lock Screen (or both) Wallpaper(s) on Android devices.
-version: 1.0.7
+version: 1.0.8
 homepage: https://github.com/AdityaMulgundkar/wallpaper_manager
 
 environment:

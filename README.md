@@ -15,7 +15,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  wallpaper_manager: "^1.0.7"
+  wallpaper_manager: "^1.0.8"
 ```
 
 In your library add the following import:
@@ -99,7 +99,7 @@ For help getting started with Flutter, view the online [documentation](https://f
 
 ## Todos
    - [ ] Write tests
-   - [ ] Add rect values for optionally cropping the image
+   - [x] Add rect values for optionally cropping the image
    - [ ] Add variable for re-using Wallpaper from phone's settings
    - [ ] Write more tests
 

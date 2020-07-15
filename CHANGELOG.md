@@ -1,3 +1,8 @@
+## 1.0.8
+
+* [Improvement - Merged PR #13](https://github.com/AdityaMulgundkar/wallpaper_manager/pull/13 "Added option for setting both screens and cropping")
+* Added two new functions - setWallpaperFromFileWithCrop & setWallpaperFromAssetWithCrop. Additional parameters (4 integers) added to allow you to set a cropped wallpaper.
+
 ## 1.0.7
 
 * [Fixed issue #7](https://github.com/AdityaMulgundkar/wallpaper_manager/issues/7 "Android resource linking failed")

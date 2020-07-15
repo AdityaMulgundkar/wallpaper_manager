@@ -7,3 +7,16 @@
 build/
 .idea/
 .idea/workspace.xml
+example/android/app/.classpath
+.idea/codeStyles/Project.xml
+.idea/workspace.xml
+android/.classpath
+android/.project
+android/.settings/org.eclipse.buildship.core.prefs
+android/gradle/wrapper/gradle-wrapper.properties
+example/android/app/.settings/org.eclipse.buildship.core.prefs
+example/android/app/.project
+example/android/.settings/org.eclipse.buildship.core.prefs
+example/android/.project
+.idea/libraries/Flutter_Plugins.xml
+android/src/main/java/com/mulgundkar/wallpaper_manager/WallpaperManagerPlugin.java___jb_old___
