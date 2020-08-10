@@ -1,3 +1,7 @@
+## 1.0.9
+
+* [Fixed issue #6](https://github.com/AdityaMulgundkar/wallpaper_manager/issues/6 "(Plug-in) Not working from Android 6.0 to downward")
+
 ## 1.0.8
 
 * [Improvement - Merged PR #13](https://github.com/AdityaMulgundkar/wallpaper_manager/pull/13 "Added option for setting both screens and cropping")

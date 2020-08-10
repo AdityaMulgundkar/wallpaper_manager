@@ -1,6 +1,7 @@
 package com.mulgundkar.wallpaper_manager;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -19,9 +20,9 @@ import java.lang.reflect.Array;
 
 import androidx.annotation.NonNull;
 import io.flutter.Log;
-import io.flutter.app.FlutterActivity;
 import io.flutter.app.FlutterApplication;
 import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.embedding.engine.loader.FlutterLoader;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.PluginRegistry;
 import io.flutter.plugin.common.MethodCall;
@@ -43,9 +44,9 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
         channel.setMethodCallHandler(this);
     }
 
-    public static void registerWith(Registrar registrar) {
-        context = registrar.context();
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "wallpaper_manager");
+    public static void registerWith(Registrar pluginRegistrar) {
+        context = pluginRegistrar.context();
+        final MethodChannel channel = new MethodChannel(pluginRegistrar.messenger(), "wallpaper_manager");
         channel.setMethodCallHandler(new WallpaperManagerPlugin());
     }
 
@@ -85,13 +86,19 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
         WallpaperManager wm = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ECLAIR) {
             wm = WallpaperManager.getInstance(context);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 try {
-                    result = wm.setBitmap(bitmap, null, false, wallpaperLocation);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                    {
+                        result = wm.setBitmap(bitmap, null, false, wallpaperLocation);
+                    }
+                    else
+                    {
+                        wm.setBitmap(bitmap);
+                        result=1;
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
         }
         return result;
     }
@@ -114,24 +121,27 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
         return result;
     }
 
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
     @SuppressLint("MissingPermission")
     private int setWallpaperFromAsset(String assetPath, int wallpaperLocation) {
-        InputStream fd = null;
         int result = -1;
         try {
-            fd = context.getAssets().open("flutter_assets/" + assetPath);
-            Bitmap bitmap = BitmapFactory.decodeStream(fd);
             WallpaperManager wm = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ECLAIR) {
-                wm = WallpaperManager.getInstance(context);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    try {
-                        result = wm.setBitmap(bitmap, null, false, wallpaperLocation);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+            wm = WallpaperManager.getInstance(context);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                InputStream inputStream = context.getAssets().open("flutter_assets/" + assetPath);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                result = wm.setBitmap(bitmap, null, false, wallpaperLocation);
             }
+            else {
+                String assetLookupKey =  FlutterLoader.getInstance().getLookupKeyForAsset(assetPath);
+                AssetManager assetManager = context.getAssets();
+                AssetFileDescriptor assetFileDescriptor = assetManager.openFd(assetLookupKey);
+                InputStream inputStream = assetFileDescriptor.createInputStream();
+                wm.setStream(inputStream);
+                result=1;
+            }
+                    
         } catch (IOException e) {
             e.printStackTrace();
         }

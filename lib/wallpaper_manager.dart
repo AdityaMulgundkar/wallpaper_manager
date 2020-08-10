@@ -13,9 +13,10 @@ class WallpaperManager {
   /// Static code for Lock Screen Wallpaper Choice
   static const int LOCK_SCREEN = 2;
 
-  // Static code for both Home Screen and Lock Screen Wallpaper Choice
+  /// Static code for both Home Screen and Lock Screen Wallpaper Choice
   static const int BOTH_SCREENS = 3;
 
+  /// Function to check working/validity of method channels
   static Future<String> get platformVersion async {
     /// String to store the version number before returning. This is just to test working/validity.
     final String version = await _channel.invokeMethod('getPlatformVersion');
@@ -38,11 +39,11 @@ class WallpaperManager {
   /// Function takes input file's path & location choice
   static Future<String> setWallpaperFromFileWithCrop(String filePath,
       int wallpaperLocation, int left, int top, int right, int bottom) async {
+    /// Variable to store operation result
     int result;
     if (left > right || top > bottom) {
       result = 0;
     } else {
-      /// Variable to store operation result
       result = await _channel.invokeMethod('setWallpaperFromFileWithCrop', {
         'filePath': filePath,
         'wallpaperLocation': wallpaperLocation,
@@ -71,11 +72,11 @@ class WallpaperManager {
   /// Function takes input file's asset (Dart/Flutter; pre-indexed in pubspec.yaml) & location choice
   static Future<String> setWallpaperFromAssetWithCrop(String assetPath,
       int wallpaperLocation, int left, int top, int right, int bottom) async {
+    /// Variable to store operation result
     int result;
     if (left > right || top > bottom || left < 0 || top < 0) {
       result = 0;
     } else {
-      /// Variable to store operation result
       result = await _channel.invokeMethod('setWallpaperFromAssetWithCrop', {
         'assetPath': assetPath,
         'wallpaperLocation': wallpaperLocation,
