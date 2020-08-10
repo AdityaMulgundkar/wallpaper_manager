@@ -1,3 +1,7 @@
+## 1.0.10
+
+* Fixed minor code issues.
+
 ## 1.0.9
 
 * [Fixed issue #6](https://github.com/AdityaMulgundkar/wallpaper_manager/issues/6 "(Plug-in) Not working from Android 6.0 to downward")

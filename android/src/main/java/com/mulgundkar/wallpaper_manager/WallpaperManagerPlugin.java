@@ -83,22 +83,16 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
     private int setWallpaperFromFile(String filePath, int wallpaperLocation) {
         int result = -1;
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-        WallpaperManager wm = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ECLAIR) {
-            wm = WallpaperManager.getInstance(context);
-                try {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                    {
-                        result = wm.setBitmap(bitmap, null, false, wallpaperLocation);
-                    }
-                    else
-                    {
-                        wm.setBitmap(bitmap);
-                        result=1;
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        WallpaperManager wm = WallpaperManager.getInstance(context);
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                result = wm.setBitmap(bitmap, null, false, wallpaperLocation);
+            } else {
+                wm.setBitmap(bitmap);
+                result = 1;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return result;
     }
@@ -107,16 +101,16 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
     private int setWallpaperFromFileWithCrop(String filePath, int wallpaperLocation, int left, int top, int right, int bottom) {
         int result = -1;
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-        WallpaperManager wm = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ECLAIR) {
-            wm = WallpaperManager.getInstance(context);
+        WallpaperManager wm = WallpaperManager.getInstance(context);
+        try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                try {
-                    result = wm.setBitmap(bitmap, new Rect(left, top, right, bottom), false, wallpaperLocation);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                result = wm.setBitmap(bitmap, new Rect(left, top, right, bottom), false, wallpaperLocation);
+            } else {
+                wm.setBitmap(bitmap);
+                result = 1;
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return result;
     }
@@ -126,22 +120,19 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
     private int setWallpaperFromAsset(String assetPath, int wallpaperLocation) {
         int result = -1;
         try {
-            WallpaperManager wm = null;
-            wm = WallpaperManager.getInstance(context);
+            WallpaperManager wm = WallpaperManager.getInstance(context);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 InputStream inputStream = context.getAssets().open("flutter_assets/" + assetPath);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 result = wm.setBitmap(bitmap, null, false, wallpaperLocation);
-            }
-            else {
-                String assetLookupKey =  FlutterLoader.getInstance().getLookupKeyForAsset(assetPath);
+            } else {
+                String assetLookupKey = FlutterLoader.getInstance().getLookupKeyForAsset(assetPath);
                 AssetManager assetManager = context.getAssets();
                 AssetFileDescriptor assetFileDescriptor = assetManager.openFd(assetLookupKey);
                 InputStream inputStream = assetFileDescriptor.createInputStream();
                 wm.setStream(inputStream);
-                result=1;
+                result = 1;
             }
-                    
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -150,21 +141,20 @@ public class WallpaperManagerPlugin implements FlutterPlugin, MethodCallHandler 
 
     @SuppressLint("MissingPermission")
     private int setWallpaperFromAssetWithCrop(String assetPath, int wallpaperLocation, int left, int top, int right, int bottom) {
-        InputStream fd = null;
         int result = -1;
         try {
-            fd = context.getAssets().open("flutter_assets/" + assetPath);
-            Bitmap bitmap = BitmapFactory.decodeStream(fd);
-            WallpaperManager wm = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ECLAIR) {
-                wm = WallpaperManager.getInstance(context);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    try {
-                        result = wm.setBitmap(bitmap, new Rect(left, top, right, bottom), false, wallpaperLocation);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+            WallpaperManager wm = WallpaperManager.getInstance(context);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                InputStream inputStream = context.getAssets().open("flutter_assets/" + assetPath);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                result = wm.setBitmap(bitmap, new Rect(left, top, right, bottom), false, wallpaperLocation);
+            } else {
+                String assetLookupKey = FlutterLoader.getInstance().getLookupKeyForAsset(assetPath);
+                AssetManager assetManager = context.getAssets();
+                AssetFileDescriptor assetFileDescriptor = assetManager.openFd(assetLookupKey);
+                InputStream inputStream = assetFileDescriptor.createInputStream();
+                wm.setStream(inputStream);
+                result = 1;
             }
         } catch (IOException e) {
             e.printStackTrace();
