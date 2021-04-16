@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('wallpaper_manager');
+  const channel = MethodChannel('wallpaper_manager');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
