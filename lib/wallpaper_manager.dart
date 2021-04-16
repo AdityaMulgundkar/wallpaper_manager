@@ -17,9 +17,9 @@ class WallpaperManager {
   static const int BOTH_SCREENS = 3;
 
   /// Function to check working/validity of method channels
-  static Future<String> get platformVersion async {
+  static Future<String?> get platformVersion async {
     /// String to store the version number before returning. This is just to test working/validity.
-    final String version = await _channel.invokeMethod('getPlatformVersion');
+    final String? version = await _channel.invokeMethod('getPlatformVersion');
 
     /// Function returns version number
     return version;
@@ -29,8 +29,8 @@ class WallpaperManager {
   static Future<String> setWallpaperFromFile(
       String filePath, int wallpaperLocation) async {
     /// Variable to store operation result
-    final int result = await _channel.invokeMethod('setWallpaperFromFile',
-        {'filePath': filePath, 'wallpaperLocation': wallpaperLocation});
+    final int result = await (_channel.invokeMethod('setWallpaperFromFile',
+        {'filePath': filePath, 'wallpaperLocation': wallpaperLocation}) as FutureOr<int>);
 
     /// Function returns the set String as result, use for debugging
     return result > 0 ? "Wallpaper set" : "There was an error.";
@@ -40,7 +40,7 @@ class WallpaperManager {
   static Future<String> setWallpaperFromFileWithCrop(String filePath,
       int wallpaperLocation, int left, int top, int right, int bottom) async {
     /// Variable to store operation result
-    int result;
+    int? result;
     if (left > right || top > bottom) {
       result = 0;
     } else {
@@ -55,15 +55,15 @@ class WallpaperManager {
     }
 
     /// Function returns the set String as result, use for debugging
-    return result > 0 ? "Wallpaper set" : "There was an error.";
+    return result! > 0 ? "Wallpaper set" : "There was an error.";
   }
 
   /// Function takes input file's asset (Dart/Flutter; pre-indexed in pubspec.yaml) & location choice
   static Future<String> setWallpaperFromAsset(
       String assetPath, int wallpaperLocation) async {
     /// Variable to store operation result
-    final int result = await _channel.invokeMethod('setWallpaperFromAsset',
-        {'assetPath': assetPath, 'wallpaperLocation': wallpaperLocation});
+    final int result = await (_channel.invokeMethod('setWallpaperFromAsset',
+        {'assetPath': assetPath, 'wallpaperLocation': wallpaperLocation}) as FutureOr<int>);
 
     /// Function returns the set String as result, use for debugging
     return result > 0 ? "Wallpaper set" : "There was an error.";
@@ -73,7 +73,7 @@ class WallpaperManager {
   static Future<String> setWallpaperFromAssetWithCrop(String assetPath,
       int wallpaperLocation, int left, int top, int right, int bottom) async {
     /// Variable to store operation result
-    int result;
+    int? result;
     if (left > right || top > bottom || left < 0 || top < 0) {
       result = 0;
     } else {
@@ -88,6 +88,6 @@ class WallpaperManager {
     }
 
     /// Function returns the set String as result, use for debugging
-    return result > 0 ? "Wallpaper set" : "There was an error.";
+    return result! > 0 ? "Wallpaper set" : "There was an error.";
   }
 }
