@@ -155,35 +155,35 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: <Widget>[
-              RaisedButton(
+              ElevatedButton(
                 child: Text("Platform Version"),
                 onPressed: initPlatformState,
               ),
               Center(
                 child: Text('Running on: $_platformVersion\n'),
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text("Set wallpaper from file"),
                 onPressed: setWallpaperFromFile,
               ),
               Center(
                 child: Text('Wallpaper status: $_wallpaperFile\n'),
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text("Set wallpaper from file with crop"),
                 onPressed: setWallpaperFromFileWithCrop,
               ),
               Center(
                 child: Text('Wallpaper status: $_wallpaperFileWithCrop\n'),
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text("Set wallpaper from asset"),
                 onPressed: setWallpaperFromAsset,
               ),
               Center(
                 child: Text('Wallpaper status: $_wallpaperAsset\n'),
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text("Set wallpaper from asset with crop"),
                 onPressed: setWallpaperFromAssetWithCrop,
               ),
