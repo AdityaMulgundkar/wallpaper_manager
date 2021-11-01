@@ -18,7 +18,7 @@ class WallpaperManager {
   /// Function to check working/validity of method channels
   static Future<String?> get platformVersion async {
     /// String to store the version number before returning. This is just to test working/validity.
-    final String? version = await _channel.invokeMethod('getPlatformVersion');
+    final version = await _channel.invokeMethod('getPlatformVersion');
 
     /// Function returns version number
     return version;
@@ -28,10 +28,8 @@ class WallpaperManager {
   static Future<String> setWallpaperFromFile(
       String filePath, int wallpaperLocation) async {
     /// Variable to store operation result
-    final int result = await (_channel.invokeMethod('setWallpaperFromFile', {
-      'filePath': filePath,
-      'wallpaperLocation': wallpaperLocation
-    }) as FutureOr<int>);
+    final int result = await (_channel.invokeMethod('setWallpaperFromFile',
+        {'filePath': filePath, 'wallpaperLocation': wallpaperLocation}));
 
     /// Function returns the set String as result, use for debugging
     return result > 0 ? "Wallpaper set" : "There was an error.";
@@ -63,10 +61,8 @@ class WallpaperManager {
   static Future<String> setWallpaperFromAsset(
       String assetPath, int wallpaperLocation) async {
     /// Variable to store operation result
-    final int result = await (_channel.invokeMethod('setWallpaperFromAsset', {
-      'assetPath': assetPath,
-      'wallpaperLocation': wallpaperLocation
-    }) as FutureOr<int>);
+    final int result = await (_channel.invokeMethod('setWallpaperFromAsset',
+        {'assetPath': assetPath, 'wallpaperLocation': wallpaperLocation}));
 
     /// Function returns the set String as result, use for debugging
     return result > 0 ? "Wallpaper set" : "There was an error.";
