@@ -32,7 +32,7 @@ class WallpaperManager {
         {'filePath': filePath, 'wallpaperLocation': wallpaperLocation}));
 
     /// Function returns the set String as result, use for debugging
-    return result > 0 ? "Wallpaper set" : "There was an error.";
+    return result > 0 ? 'Wallpaper set' : 'There was an error.';
   }
 
   /// Function takes input file's path & location choice
@@ -54,7 +54,7 @@ class WallpaperManager {
     }
 
     /// Function returns the set String as result, use for debugging
-    return result! > 0 ? "Wallpaper set" : "There was an error.";
+    return result! > 0 ? 'Wallpaper set' : 'There was an error.';
   }
 
   /// Function takes input file's asset (Dart/Flutter; pre-indexed in pubspec.yaml) & location choice
@@ -65,7 +65,7 @@ class WallpaperManager {
         {'assetPath': assetPath, 'wallpaperLocation': wallpaperLocation}));
 
     /// Function returns the set String as result, use for debugging
-    return result > 0 ? "Wallpaper set" : "There was an error.";
+    return result > 0 ? 'Wallpaper set' : 'There was an error.';
   }
 
   /// Function takes input file's asset (Dart/Flutter; pre-indexed in pubspec.yaml) & location choice
@@ -87,6 +87,6 @@ class WallpaperManager {
     }
 
     /// Function returns the set String as result, use for debugging
-    return result! > 0 ? "Wallpaper set" : "There was an error.";
+    return result! > 0 ? 'Wallpaper set' : 'There was an error.';
   }
 }

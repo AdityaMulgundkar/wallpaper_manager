@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await WallpaperManager.platformVersion ?? "";
+      platformVersion = await WallpaperManager.platformVersion ?? '';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> setWallpaperFromFile() async {
     setState(() {
-      _wallpaperFile = "Loading";
+      _wallpaperFile = 'Loading';
     });
     String result;
     var file = await DefaultCacheManager().getSingleFile(
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> setWallpaperFromFileWithCrop() async {
     setState(() {
-      _wallpaperFileWithCrop = "Loading";
+      _wallpaperFileWithCrop = 'Loading';
     });
     String result;
     var file = await DefaultCacheManager().getSingleFile(
@@ -99,10 +99,10 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> setWallpaperFromAsset() async {
     setState(() {
-      _wallpaperAsset = "Loading";
+      _wallpaperAsset = 'Loading';
     });
     String result;
-    String assetPath = "assets/tmp1.jpg";
+    var assetPath = 'assets/tmp1.jpg';
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await WallpaperManager.setWallpaperFromAsset(
@@ -124,10 +124,10 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> setWallpaperFromAssetWithCrop() async {
     setState(() {
-      _wallpaperAssetWithCrop = "Loading";
+      _wallpaperAssetWithCrop = 'Loading';
     });
     String result;
-    String assetPath = "assets/tmp1.jpg";
+    var assetPath = 'assets/tmp1.jpg';
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await WallpaperManager.setWallpaperFromAssetWithCrop(
@@ -155,37 +155,37 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: <Widget>[
-              RaisedButton(
-                child: Text("Platform Version"),
+              ElevatedButton(
                 onPressed: initPlatformState,
+                child: Text('Platform Version'),
               ),
               Center(
                 child: Text('Running on: $_platformVersion\n'),
               ),
-              RaisedButton(
-                child: Text("Set wallpaper from file"),
+              ElevatedButton(
                 onPressed: setWallpaperFromFile,
+                child: Text('Set wallpaper from file'),
               ),
               Center(
                 child: Text('Wallpaper status: $_wallpaperFile\n'),
               ),
-              RaisedButton(
-                child: Text("Set wallpaper from file with crop"),
+              ElevatedButton(
                 onPressed: setWallpaperFromFileWithCrop,
+                child: Text('Set wallpaper from file with crop'),
               ),
               Center(
                 child: Text('Wallpaper status: $_wallpaperFileWithCrop\n'),
               ),
-              RaisedButton(
-                child: Text("Set wallpaper from asset"),
+              ElevatedButton(
                 onPressed: setWallpaperFromAsset,
+                child: Text('Set wallpaper from asset'),
               ),
               Center(
                 child: Text('Wallpaper status: $_wallpaperAsset\n'),
               ),
-              RaisedButton(
-                child: Text("Set wallpaper from asset with crop"),
+              ElevatedButton(
                 onPressed: setWallpaperFromAssetWithCrop,
+                child: Text('Set wallpaper from asset with crop'),
               ),
               Center(
                 child: Text('Wallpaper status: $_wallpaperAssetWithCrop\n'),
