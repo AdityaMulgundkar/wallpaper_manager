@@ -28,8 +28,9 @@ class WallpaperManager {
   static Future<String> setWallpaperFromFile(
       String filePath, int wallpaperLocation) async {
     /// Variable to store operation result
-    final int result = await (_channel.invokeMethod('setWallpaperFromFile',
-        {'filePath': filePath, 'wallpaperLocation': wallpaperLocation}));
+    final result = await (_channel.invokeMethod('setWallpaperFromFile',
+            {'filePath': filePath, 'wallpaperLocation': wallpaperLocation})) ??
+        1;
 
     /// Function returns the set String as result, use for debugging
     return result > 0 ? 'Wallpaper set' : 'There was an error.';
